@@ -1,0 +1,1 @@
+=SI(ET(A2>80; A2<120); "moyenne";SI(A2>120; "haute standing"; "social"))

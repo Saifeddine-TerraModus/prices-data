@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<body>
+  
+<style>
+body {
+	background: #f3f3f3;
+	padding: 30px 20px;
+}
+
+.dashboard-cards {
+  position: relative;
+  padding-bottom: 50px;
+  margin: 0 !important;
+}
+.dashboard-cards .card {
+  background: #ffffff;
+  display: inline-block;
+  -webkit-perspective: 1000;
+          perspective: 1000;
+  z-index: 20;
+  padding: 0 !important;
+  margin: 5px 5px 10px 5px;
+  position: relative;
+  text-align: left;
+  -webkit-transition: all 0.3s 0s ease-in;
+  transition: all 0.3s 0s ease-in;
+  z-index: 1;
+  width: calc(33.33333333% - 10px);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.dashboard-cards .card:hover {
+      box-shadow: 0 15px 10px -10px rgba(31, 31, 31, 0.5);
+  transition: all 0.3s ease;
+}
+.dashboard-cards .card .card-title {
+  background: #ffffff;
+  padding: 20px 15px;
+  position: relative;
+  z-index: 0;
+}
+.dashboard-cards .card .card-title h2 {
+  font-size: 24px;
+  letter-spacing: -0.05em;
+  margin: 0;
+  padding: 0;
+}
+.dashboard-cards .card .card-title h2 small {
+  display: block;
+  font-size: 14px;
+  margin-top: 8px;
+  letter-spacing: -0.025em;
+}
+.dashboard-cards .card .card-description {
+  position: relative;
+  font-size: 14px;
+  border-top: 1px solid #ddd;
+  padding: 10px 15px 0 15px;
+}
+.dashboard-cards .card .card-actions {
+  box-shadow: 0 2px 0px 0 rgba(0, 0, 0, 0.075);
+  padding: 10px;
+  text-align: center;
+}
+.dashboard-cards .card .card-flap {
+  background: #d9d9d9;
+  position: absolute;
+  width: 100%;
+  -webkit-transform-origin: top;
+          transform-origin: top;
+  -webkit-transform: rotateX(-90deg);
+          transform: rotateX(-90deg);
+}
+.dashboard-cards .card .flap1 {
+  -webkit-transition: all 0.3s 0.3s ease-out;
+  transition: all 0.3s 0.3s ease-out;
+  z-index: -1;
+}
+.dashboard-cards .card .flap2 {
+  -webkit-transition: all 0.3s 0s ease-out;
+  transition: all 0.3s 0s ease-out;
+  z-index: -2;
+}
+.dashboard-cards.showing .card {
+  cursor: pointer;
+  opacity: 0.6;
+  -webkit-transform: scale(0.88);
+          transform: scale(0.88);
+}
+.dashboard-cards .no-touch .dashboard-cards.showing .card:hover {
+  opacity: 0.94;
+  -webkit-transform: scale(0.92);
+          transform: scale(0.92);
+}
+.dashboard-cards .card.d-card-show {
+  opacity: 1 !important;
+  -webkit-transform: scale(1) !important;
+          transform: scale(1) !important;
+}
+.dashboard-cards .card.d-card-show .card-flap {
+  background: #ffffff;
+  -webkit-transform: rotateX(0deg);
+          transform: rotateX(0deg);
+}
+.dashboard-cards .card.d-card-show .flap1 {
+  -webkit-transition: all 0.3s 0s ease-out;
+  transition: all 0.3s 0s ease-out;
+}
+.dashboard-cards .card.d-card-show .flap2 {
+  -webkit-transition: all 0.3s 0.2s ease-out;
+  transition: all 0.3s 0.2s ease-out;
+}
+.dashboard-cards .card .task-count {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 22px;
+  right: 10px;
+  background: #ecf0f1;
+  text-align: center;
+  line-height: 40px;
+  border-radius: 100%;
+  color: #333333;
+  font-weight: 600;
+  transition: all .2s ease;
+}
+
+
+.dashboard-cards .task-list {
+	padding: 0 !important;
+}
+.dashboard-cards .task-list li {
+  padding: 10px 0;
+  padding-left: 10px;
+  margin: 3px 0;
+	list-style-type: none;
+  border-bottom: 1px solid #e9ebed;
+  border-left: 3px solid #f36525;
+  transition: all .2s ease;
+}
+.dashboard-cards .task-list li:hover {
+  background: #ecf0f1;
+  transition: all .2s ease;
+}
+.dashboard-cards .task-list li span {
+  float: right;
+  color: #f36525;
+  margin-right: 5px;
+}
+.dashboard-cards.showing .card.d-card-show .task-count {
+  color: #ffffff;
+  background: #f36525;
+  transition: all .2s ease;
+}
+.dashboard-cards .card-actions .btn {
+	color: #333;
+}
+.dashboard-cards .card-actions .btn:hover {
+	color: #f36525;
+}
+.iconjuridique {
+  background-image: url(https://img.icons8.com/dotty/80/null/scales.png);
+    left: 52px;
+    height: 64px;
+    top: 17px;
+    width: 64px;
+}
+.iconfinancier {
+  background-image: url(https://img.icons8.com/dotty/80/null/bullish.png);
+    left: 52px;
+    height: 64px;
+    top: 17px;
+    width: 64px;
+}
+
+.iconfiscal {
+  background-image: url(https://img.icons8.com/pastel-glyph/64/null/sign-document.png);
+    left: 52px;
+    height: 64px;
+    top: 17px;
+    width: 64px;
+}
+.iconurbanisme {
+  background-image: url(https://img.icons8.com/pastel-glyph/64/null/skyscrapers--v1.png);
+    left: 52px;
+    height: 64px;
+    top: 17px;
+    width: 64px;
+}
+
+.icondigital {
+  background-image: url(https://img.icons8.com/pastel-glyph/64/null/brain-3--v1.png);
+  background-size: cover;
+    left: 52px;
+    height: 64px;
+    top: 17px;
+    width: 64px;
+    
+}
+.iconfoncier {
+  background-image: url(https://img.icons8.com/pastel-glyph/64/null/property.png);
+  background-size: cover;
+    left: 52px;
+    height: 64px;
+    top: 17px;
+    width: 64px;
+    
+}
+.iconeconomie {
+  background-image: url(https://img.icons8.com/pastel-glyph/64/null/gold-bars--v1.png);
+  background-size: cover;
+    left: 52px;
+    height: 64px;
+    top: 17px;
+    width: 64px;
+    
+}
+.icontechnique {
+  background-image: url(https://img.icons8.com/carbon-copy/256/floor-plan.png);
+  background-size: cover;
+    left: 52px;
+    height: 64px;
+    top: 17px;
+    width: 64px;
+    
+}
+.icondurable {
+  background-image: url(https://img.icons8.com/pastel-glyph/64/null/development--v2.png);
+  background-size: cover;
+    left: 52px;
+    height: 64px;
+    top: 17px;
+    width: 64px;
+    
+}
+.icongestion {
+  background-image: url(https://img.icons8.com/pastel-glyph/64/null/calendar-list.png);
+  background-size: cover;
+    left: 52px;
+    height: 64px;
+    top: 17px;
+    width: 64px;
+}
+.row dashboard-cards {
+  display: flex;
+  justify-content: center;
+}
+.big-div {
+  position: absolute;
+  top: 1%; /* adjust the value to center vertically */
+  right: 1%; /* adjust the value to center horizontally */
+  height: 90%;
+  width: 30%;
+  background-image: url(https://plus.unsplash.com/premium_photo-1670226145708-fe8e83e8d9da?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=715&q=80); /* replace with your image path */
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.big-div:hover::before {
+  content: "Get to Map";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  color: #fff;
+}
+
+.big-div::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+</style>
+<div class="row dashboard-cards">
+  <div class="big-div"></div>
+    <div class="card col-md-4">
+      <div class="card-title">
+        <div class="iconjuridique"></div>
+        <h2>
+          Juridique
+          <small>You have 14 Documents</small>
+        </h2>
+        <div class="task-count">
+          14
+        </div>
+      </div>
+      <div class="card-flap flap1">
+        <div class="card-description">
+          <ul class="task-list">
+            <li>
+              Document 1
+              <span>New</span>
+            </li>
+            <li>
+              Document 2
+              <span>New</span>
+            </li>
+            <li>
+              Document 3
+              <span>New</span>
+            </li>
+            <li>
+              Document 4
+              <span>New</span>
+            </li>
+          </ul>
+        </div>
+        <div class="card-flap flap2">
+          <div class="card-actions">
+            <a class="btn" href="#">Close</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card col-md-4">
+      <div class="card-title">
+        <div class="iconfoncier"></div>
+        <h2>
+          Foncier
+          <small>You have 101 Documents</small>
+        </h2>
+        <div class="task-count">
+          101
+        </div>
+      </div>
+      <div class="card-flap flap1">
+        <div class="card-description">
+          <ul class="task-list">
+            <li>
+              Document 1
+              <span>New</span>
+            </li>
+            <li>
+              Document 2
+              <span>New</span>
+            </li>
+            <li>
+              Document 3
+              <span>New</span>
+            </li>
+            <li>
+              Document 4
+              <span>New</span>
+            </li>
+          </ul>
+        </div>
+        <div class="card-flap flap2">
+          <div class="card-actions">
+            <a class="btn" href="#">Close</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card col-md-4">
+      <div class="card-title">
+        <div class="iconurbanisme"></div>
+        <h2>
+          Urbanisme 
+          <small>You have 9 Documents</small>
+        </h2>
+        <div class="task-count">
+          9
+        </div>
+      </div>
+      <div class="card-flap flap1">
+        <div class="card-description">
+          <ul class="task-list">
+            <li>
+              Document 1
+              <span>New</span>
+            </li>
+            <li>
+              Document 2
+              <span>New</span>
+            </li>
+            <li>
+              Document 3
+              <span>New</span>
+            </li>
+            <li>
+              Document 4
+              <span>New</span>
+            </li>
+          </ul>
+        </div>
+        <div class="card-flap flap2">
+          <div class="card-actions">
+            <a class="btn" href="#">Close</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card col-md-4">
+      <div class="card-title">
+        <div class="iconeconomie"></div>
+        <h2>
+          Economie
+          <small>You have 76 Documents</small>
+        </h2>
+        <div class="task-count">
+          76
+        </div>
+      </div>
+      <div class="card-flap flap1">
+        <div class="card-description">
+          <ul class="task-list">
+            <li>
+              Document 1
+              <span>New</span>
+            </li>
+            <li>
+              Document 2
+              <span>New</span>
+            </li>
+            <li>
+              Document 3
+              <span>New</span>
+            </li>
+            <li>
+              Document 4
+              <span>New</span>
+            </li>
+          </ul>
+        </div>
+        <div class="card-flap flap2">
+          <div class="card-actions">
+            <a class="btn" href="#">Close</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card col-md-4">
+      <div class="card-title">
+        <div class="iconfinancier"></div>
+        <h2>
+          Financier
+          <small>You have 43 Documents</small>
+        </h2>
+        <div class="task-count">
+          43
+        </div>
+      </div>
+      <div class="card-flap flap1">
+        <div class="card-description">
+          <ul class="task-list">
+            <li>
+              Document 1
+              <span>New</span>
+            </li>
+            <li>
+              Document 2
+              <span>New</span>
+            </li>
+            <li>
+              Document 3
+              <span>New</span>
+            </li>
+            <li>
+              Document 4
+              <span>New</span>
+            </li>
+          </ul>
+        </div>
+        <div class="card-flap flap2">
+          <div class="card-actions">
+            <a class="btn" href="#">Close</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card col-md-4">
+      <div class="card-title">
+        <div class="icontechnique"></div>
+        <h2>
+          Technique 
+          <small>You have 24 Documents</small>
+        </h2>
+        <div class="task-count">
+          24
+        </div>
+      </div>
+      <div class="card-flap flap1">
+        <div class="card-description">
+          <ul class="task-list">
+            <li>
+              Document 1
+              <span>New</span>
+            </li>
+            <li>
+              Document 2
+              <span>New</span>
+            </li>
+            <li>
+              Document 3
+              <span>New</span>
+            </li>
+            <li>
+              Document 4
+              <span>New</span>
+            </li>
+          </ul>
+        </div>
+        <div class="card-flap flap2">
+          <div class="card-actions">
+            <a class="btn" href="#">Close</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card col-md-4">
+      <div class="card-title">
+        <div class="icondigital"></div>
+        <h2>
+          Digital
+          <small>You have 43 Documents</small>
+        </h2>
+        <div class="task-count">
+          43
+        </div>
+      </div>
+      <div class="card-flap flap1">
+        <div class="card-description">
+          <ul class="task-list">
+            <li>
+              Document 1
+              <span>New</span>
+            </li>
+            <li>
+              Document 2
+              <span>New</span>
+            </li>
+            <li>
+              Document 3
+              <span>New</span>
+            </li>
+            <li>
+              Document 4
+              <span>New</span>
+            </li>
+          </ul>
+        </div>
+        <div class="card-flap flap2">
+          <div class="card-actions">
+            <a class="btn" href="#">Close</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card col-md-4">
+      <div class="card-title">
+        <div class="icondurable"></div>
+        <h2>
+          D. Durable
+          <small>You have 43 Documents</small>
+        </h2>
+        <div class="task-count">
+          43
+        </div>
+      </div>
+      <div class="card-flap flap1">
+        <div class="card-description">
+          <ul class="task-list">
+            <li>
+              Document 1
+              <span>New</span>
+            </li>
+            <li>
+              Document 2
+              <span>New</span>
+            </li>
+            <li>
+              Document 3
+              <span>New</span>
+            </li>
+            <li>
+              Document 4
+              <span>New</span>
+            </li>
+          </ul>
+        </div>
+        <div class="card-flap flap2">
+          <div class="card-actions">
+            <a class="btn" href="#">Close</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card col-md-4">
+      <div class="card-title">
+        <div class="iconfiscal"></div>
+        <h2>
+          Fiscalité 
+          <small>You have 43 DocumentS</small>
+        </h2>
+        <div class="task-count">
+          43
+        </div>
+      </div>
+      <div class="card-flap flap1">
+        <div class="card-description">
+          <ul class="task-list">
+            <li>
+              Document 1
+              <span>New</span>
+            </li>
+            <li>
+              Document 2
+              <span>New</span>
+            </li>
+            <li>
+              Document 3
+              <span>New</span>
+            </li>
+            <li>
+              Document 4
+              <span>New</span>
+            </li>
+          </ul>
+        </div>
+        <div class="card-flap flap2">
+          <div class="card-actions">
+            <a class="btn" href="#">Close</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card col-md-4">
+      <div class="card-title">
+        <div class="icongestion"></div>
+        <h2>
+          Gestion
+          <small>You have 43 Document</small>
+        </h2>
+        <div class="task-count">
+          43
+        </div>
+      </div>
+      <div class="card-flap flap1">
+        <div class="card-description">
+          <ul class="task-list">
+            <li>
+              Document 1
+              <span>New</span>
+            </li>
+            <li>
+              Document 2
+              <span>New</span>
+            </li>
+            <li>
+              Document 3
+              <span>New</span>
+            </li>
+            <li>
+              Document 4
+              <span>New</span>
+            </li>
+          </ul>
+        </div>
+        <div class="card-flap flap2">
+          <div class="card-actions">
+            <a class="btn" href="#">Close</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  </body>
+  <script>
+    $(document).ready(function(){
+  var zindex = 10;
+  
+  $("div.card").click(function(e){
+    e.preventDefault();
+
+    var isShowing = false;
+
+    if ($(this).hasClass("d-card-show")) {
+      isShowing = true;
+    }
+
+    if ($(".dashboard-cards").hasClass("showing")) {
+      // a card is already in view
+      $(".card.d-card-show")
+        .removeClass("d-card-show");
+
+      if (!isShowing) {
+        // this card isn't showing - get in with it
+        $(this)
+          .css({zIndex: zindex})
+          .addClass("d-card-show");
+
+      }
+
+      zindex++;
+
+    } else {
+      // no dashboard-cards in view
+      $(".dashboard-cards")
+        .addClass("showing");
+      $(this)
+        .css({zIndex:zindex})
+        .addClass("d-card-show");
+
+      zindex++;
+    }
+    
+  });
+});
+  </script>
+</html>

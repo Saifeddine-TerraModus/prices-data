@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="intro">
+  <div id="logo" style = "transform: translate(0%, -13%); animation: spin 2s linear 1;"></div>
+  <a href="#form" class="enter-btn" style = 'bottom: 0; left: 50%; transform: translate(-500%, 430%);'>Connect</a>
+</div>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  
+<div id="form">
+  <div class="container">
+    <div id = "logo" style ="transform: translateX(-150%);;top:0; left:0;width: 200px;
+    height: 200px;">
+    </div>
+    <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-md-8 col-md-offset-2">
+      <div id="userform">
+        <ul class="nav nav-tabs nav-justified" role="tablist">
+          <li class="active"><a href="#signup" role="tab" data-toggle="tab">Sign up</a></li>
+          <li><a href="#login" role="tab" data-toggle="tab">Log in</a></li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane fade active in" id="signup">
+            <h2 class="text-uppercase text-center"> Connexion</h2>
+            <form name="signup_form">
+              <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                  <div class="form-group">
+                    <label> Prénom<span class="req">*</span> </label>
+                    <input type="text" name="name" class="form-control" id="first_name" required="" data-validation-required-message="Please enter your name." autocomplete="off">
+                    <p class="help-block text-danger"></p>
+                  </div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                  <div class="form-group">
+                    <label> Nom<span class="req">*</span> </label>
+                    <input type="name" class="form-control" id="last_name" required="" data-validation-required-message="Please enter your name." autocomplete="off">
+                    <p class="help-block text-danger"></p>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label> Email<span class="req">*</span> </label>
+                <input type="email" name="email" class="form-control" id="email" required="" data-validation-required-message="Please enter your email address." autocomplete="off">
+                <p class="help-block text-danger"></p>
+              </div>
+              <div class="form-group">
+                <label> Téléphone<span class="req">*</span> </label>
+                <input type="telephone" name="telephone" class="form-control" id="phone" required="" data-validation-required-message="Please enter your phone number." autocomplete="off">
+                <p class="help-block text-danger"></p>
+              </div>
+              <div class="form-group">
+                <label> Mot de passe<span class="req">*</span> </label>
+                <input type="password" name="password" class="form-control" id="password" required="" data-validation-required-message="Please enter your password" autocomplete="off">
+                <p class="help-block text-danger"></p>
+              </div>
+              <div class="mrgn-30-top">
+                <button type="submit" class="btn btn-larger btn-block">
+                Sign up
+                </button>
+              </div>
+            </form>
+          </div>
+          <div class="tab-pane fade in" id="login">
+            <h2 class="text-uppercase text-center"> Log in</h2>
+            <form name="login_form">
+              <div class="form-group">
+                <label> Email<span class="req">*</span> </label>
+                <input type="email" name="email" class="form-control" id="email" required="" data-validation-required-message="Please enter your email address." autocomplete="off">
+                <p class="help-block text-danger"></p>
+              </div>
+              <div class="form-group">
+                <label> Mot de passe<span class="req">*</span> </label>
+                <input type="password" name="password" class="form-control" id="password" required="" data-validation-required-message="Please enter your password" autocomplete="off">
+                <p class="help-block text-danger"></p>
+              </div>
+              <div class="mrgn-30-top">
+                <button type="submit" class="btn btn-larger btn-block">
+                Log in
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /.container --> 
+</div>
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+{% endblock %}

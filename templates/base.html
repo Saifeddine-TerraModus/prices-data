@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Login System</title>
+  <style>
+    /* Add some styling for the intro section */
+    #intro {
+      width: 100%;
+      height: 100vh;
+      background-color: rgb(255, 255, 255);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    /* Add some styling for the logo */
+    #logo {
+      top:0;
+      width: 200px;
+      height: 200px;
+      background-image:url("LOGO.png");
+      background-size: contain;
+    }
+    /* Add keyframe animation */
+    @keyframes spin {
+        from {transform: rotate(0deg);}
+        to {transform: rotate(360deg);}
+      }
+
+
+    /* Add some styling for the text */
+    h1 {
+      color: rgb(255, 255, 255);
+      font-size: 72px;
+      text-shadow: 2px 2px #000;
+      margin-bottom: 20px;
+    }
+
+    /* Add some styling for the button */
+    .enter-btn {
+      background-color: #f44336;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 4px;
+      text-decoration: none;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+  <link rel="stylesheet" href="/static/css/normalize.css">
+  <link rel="stylesheet" href="/static/css/styless777.css">
+
+</head>
+<body style="background-color:rgb(255, 255, 255);">
+
+  {% block content %}
+    {# Template inserted here #}
+  {% endblock %}
+  
+  <script src="/static/js/jquery.js"></script>
+  <script src="/static/js/scripts.js"></script>
+  
+</body>
+</html>
